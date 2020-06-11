@@ -81,5 +81,11 @@
       "npm run lint",
       "git add"
     ]
-  }
+  },
+  "browserslist": [
+    "last 2 version",
+    "Firefox ESR",
+    "> 1%",
+    "ie >= 9"
+  ]
 }
