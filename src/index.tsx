@@ -1,6 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'mobx-react';
+import { stores, StoresContext, useUserModel } from './models';
 
-const b = '2';
-const a: string = b;
-ReactDOM.render(<div>{a}</div>, document.getElementById('app'));
+function A(props) {
+  const { getUserInfo, userInfo } = useUserModel();
+  console.log(getUserInfo);
+  console.log(userInfo);
+  return <div></div>;
+}
+
+ReactDOM.render(
+  <Provider {...stores}>
+    <StoresContext.Provider value={stores}>
+      <A />
+    </StoresContext.Provider>
+  </Provider>,
+  document.getElementById('app')
+);

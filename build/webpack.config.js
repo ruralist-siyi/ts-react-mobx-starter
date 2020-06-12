@@ -1,12 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const { CheckerPlugin } = require('awesome-typescript-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ROOT = path.resolve(__dirname);
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
+  mode: isProd ? 'production' : 'development',
   entry: './src/index.tsx',
   output: {
     filename: 'js/[name].[hash].js',
@@ -18,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(jsx|tsx)?$/, // 支持ts, tsx
+        test: /\.(js|ts|tsx|jsx)?$/,
         use: [
           'babel-loader',
           {
@@ -29,7 +31,6 @@ module.exports = {
           }
         ]
       },
-      { enforce: 'pre', test: /\.ts[x]$/, loader: 'source-map-loader' },
       {
         test: /\.(css|less)$/,
         use: [
@@ -57,7 +58,7 @@ module.exports = {
       }
     ]
   },
-  devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
+  devtool: isProd ? false : 'inline-source-map',
   devServer: {
     contentBase: '../dist',
     stats: 'errors-only',
@@ -71,11 +72,11 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json', '.png'],
     alias: {
-      '@': ROOT + '/src'
+      '@': ROOT + '/src/components',
+      '@utils': ROOT + '/src/utils'
     }
   },
   plugins: [
-    new CheckerPlugin(),
     new CleanWebpackPlugin({
       verbose: true
     }),
