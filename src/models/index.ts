@@ -1,21 +1,16 @@
 import { createContext, useContext } from 'react';
 import UserModel from './User';
 
-function createStores() {
+function createRootAppModel() {
   return {
     user: new UserModel()
   };
 }
 
-const stores = createStores();
+const rootAppModel = createRootAppModel();
 
-const StoresContext = createContext(stores);
+const RootAppContext = createContext(rootAppModel);
 
-const useStores: any = () => useContext(StoresContext);
+const useRootAppContext: any = () => useContext(RootAppContext);
 
-function useUserModel(): any {
-  const { user } = useStores();
-  return user;
-}
-
-export { stores, useStores, useUserModel, StoresContext };
+export { rootAppModel, useRootAppContext, RootAppContext };

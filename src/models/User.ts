@@ -1,4 +1,6 @@
-import { action, observable, computed } from 'mobx';
+import { action, observable, computed, configure } from 'mobx';
+
+configure({ enforceActions: 'observed' });
 
 interface IUser {
   name: string;
@@ -13,7 +15,8 @@ class User {
     return this.userInfo?.name;
   }
 
-  @action.bound setUserInfo(data: IUser) {
+  @action.bound
+  setUserInfo(data: IUser) {
     console.log('setUserInfo', data);
     this.userInfo = data;
   }

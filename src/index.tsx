@@ -1,23 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, observer } from 'mobx-react';
-import { stores, StoresContext, useUserModel } from './models';
+import { observer } from 'mobx-react';
+import { rootAppModel, RootAppContext, useRootAppContext } from './models';
 
 const A = observer(() => {
-  const { getUserName, userInfo, setUserInfo } = useUserModel();
+  const appModel = useRootAppContext();
+  const { getUserName, userInfo, setUserInfo } = appModel.user;
   if (!getUserName) {
     setUserInfo({ name: 'zhangsan' });
   }
   console.log(1, getUserName);
   console.log(userInfo);
-  return <div></div>;
+  console.log(appModel);
+  return <div>{getUserName}</div>;
 });
 
-ReactDOM.render(
-  <Provider {...stores}>
-    <StoresContext.Provider value={stores}>
+const RootApp = () => {
+  return (
+    <RootAppContext.Provider value={rootAppModel}>
       <A />
-    </StoresContext.Provider>
-  </Provider>,
-  document.getElementById('app')
-);
+    </RootAppContext.Provider>
+  );
+};
+
+ReactDOM.render(<RootApp />, document.getElementById('app'));
