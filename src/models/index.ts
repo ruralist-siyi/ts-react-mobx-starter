@@ -1,16 +1,35 @@
 import { createContext, useContext } from 'react';
-import UserModel from './User';
+import { configure } from 'mobx';
+import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
+import * as MobxRouterType from 'mobx-react-router/types';
+import { createBrowserHistory } from 'history';
+import { openMobxLogger } from '@utils/mobx';
+import UserModel from './user';
 
-function createRootAppModel() {
+configure({ enforceActions: 'observed' });
+
+openMobxLogger(['action']);
+
+interface IRootAppModel {
+  user: IUserModel.UserModel;
+  routing: MobxRouterType.RouterStore;
+}
+const browserHistory = createBrowserHistory();
+const routingStore: MobxRouterType.RouterStore = new RouterStore();
+
+function createRootAppModel(): IRootAppModel {
   return {
-    user: new UserModel()
+    user: new UserModel(),
+    routing: routingStore
   };
 }
 
+const history = syncHistoryWithStore(browserHistory, routingStore);
+
 const rootAppModel = createRootAppModel();
 
-const RootAppContext = createContext(rootAppModel);
+const RootAppContext = createContext<IRootAppModel>(rootAppModel);
 
-const useRootAppContext: any = () => useContext(RootAppContext);
+const useRootAppContext: () => IRootAppModel = () => useContext(RootAppContext);
 
-export { rootAppModel, useRootAppContext, RootAppContext };
+export { rootAppModel, useRootAppContext, RootAppContext, history };

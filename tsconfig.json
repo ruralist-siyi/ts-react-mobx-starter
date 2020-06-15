@@ -11,15 +11,18 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "declaration": true
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@": ["src/components/*"],
+      "@views/*": ["src/views/*"],
+      "@utils/*": ["src/utils/*"],
+      "@models/*": ["src/models/*"],
+      "@router/*": ["src/router/*"],
+      "@assets/*": ["src/assets/*"],
+      "@constants/*": ["src/constants/*"]
+    }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    "jest"
-  ]
+  "include": ["src/**/*.{ts,js,jsx,tsx}"],
+  "exclude": ["node_modules", "dist", "build", "jest"]
 }
