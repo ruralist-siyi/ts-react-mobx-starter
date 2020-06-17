@@ -9,4 +9,4 @@ export interface IUserInfo {
   email: string;
 }
 
-export type TUserInfo = IUser | null;
+export type TUserInfo = IUserInfo | null;
