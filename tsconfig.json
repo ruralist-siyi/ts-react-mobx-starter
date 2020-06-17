@@ -23,6 +23,6 @@
       "@constants/*": ["src/constants/*"]
     }
   },
-  "include": ["src/**/*.{ts,js,jsx,tsx}"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "build", "jest"]
 }
