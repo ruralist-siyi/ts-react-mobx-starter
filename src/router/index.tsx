@@ -1,15 +1,22 @@
 import React, { FC } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
+import DynamicCompnent from './DynamicCompnent';
 import { history } from '@models/index';
-import Home from '@views/Home';
-import Login from '@views/Login';
 
 const RootRouter: FC = () => {
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
+        <Route
+          exact
+          path='/'
+          component={DynamicCompnent(React.lazy(() => import('@views/Home')))}
+        />
+        <Route
+          exact
+          path='/login'
+          component={DynamicCompnent(React.lazy(() => import('@views/Login')))}
+        />
       </Switch>
     </Router>
   );
