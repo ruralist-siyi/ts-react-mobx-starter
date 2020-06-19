@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { LazyExoticComponent, ReactElement } from 'react';
+import { RouteComponentProps } from 'react-router';
 
-const DyCompnent = component => {
+// eslint-disable-next-line
+type LazyComponentType = LazyExoticComponent<React.ComponentType<any>>;
+type DynamicReturn = (props: RouteComponentProps) => ReactElement;
+
+const DyCompnent = (component: LazyComponentType): DynamicReturn => {
   const LazyComponent = component;
-  return props => (
-    <React.Suspense fallback={<div>Loading...</div>}>
-      <LazyComponent {...props} />
-    </React.Suspense>
-  );
+
+  return props => {
+    return (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <LazyComponent {...props} />
+      </React.Suspense>
+    );
+  };
 };
 
 export default DyCompnent;

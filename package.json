@@ -7,9 +7,9 @@
     "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js",
     "build": "npm run prettier && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js",
-    "analyz": "cross-env NODE_ENV=production REPORT=true npm run build",
+    "report": "cross-env REPORT=true npm run build",
     "lint": "eslint src --fix --ext .ts,.tsx,.js",
-    "prettier": "prettier -c --write 'src/**/*.{ts,js,jsx,tsx,less,css,json}'",
+    "prettier": "prettier -c --write src/**/*.{ts,js,jsx,tsx,less,css,json}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

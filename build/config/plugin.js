@@ -5,8 +5,8 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const isReport = process.env.REPORT === true;
 const isDev = process.env.NODE_ENV === 'development';
+const isReport = process.env.REPORT === 'true';
 
 const plugins = [
   new CleanWebpackPlugin({

@@ -38,6 +38,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 2,
     'react/jsx-uses-react': 2,
     'react/jsx-uses-vars': 2,
+    'react/display-name': 0,
     'react/react-in-jsx-scope': 2,
     'no-dupe-args': 2,
     'no-dupe-keys': 2,

@@ -6,5 +6,6 @@ module.exports = {
   port: 8081,
   historyApiFallback: true,
   hot: true,
-  open: true
+  open: true,
+  overlay: true
 };
